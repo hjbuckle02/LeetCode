@@ -1,0 +1,56 @@
+#The following is a solution to the twoSum problem (easy level) on LeetCode.
+'''
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
+Example 1:
+    Input: nums = [2,7,11,15], target = 9
+    Output: [0,1]
+    Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+'''
+class Solution(object):
+    def twoSum(self, nums, target):
+        hp = {}
+        #defining hashmap as hp
+        for i, n in enumerate(nums, 0):
+            if (target - n) in hp:
+                return [hp[target-n], i]
+            else:
+                hp[n] = i
+
+        return ()
+     
+        '''
+        The easy solution is 0(n^2) run-time complexity. The notation 0(n^2) refers to the upper bound of the growth rate
+        of an algorithm's running time as a function of the input size. In other words, the running time of the algorithm
+        grows quadratically with the size of the input. If you double the size of the input (n), the running time will
+        approximately quadruple.
+
+        This is often associated with nested loops (which is when a loop is located inside of another loop, often used
+        when working with two dimensions) where for each element in the input, you have to perform an operation for every
+        other input.
+
+        The easy solution in question:
+
+                forEach(item1 in array){
+                    forEach(item2 in array){
+                        if (item1 + item2 == target) {
+                            return result
+                        }
+                    }
+        However, this method is slow for larger arrays. By using a hashmap (essentially a data dictionary in which values
+        are mapped to keys, and using a key, a particular value can be accessed -- each key is unique and associated with
+        a specific value) the search for whether a number is in the array (Y) or not (N) can be signficantly faster. This
+        methodology works, but an issue can occur when duplicate numbers are introduced. The hashmap therefore needs a way
+        to store positions of all occurrences of a specific number.
+
+        To do this, one must do the following:
+
+            1) traverse the array one by one
+            2) put the 'target - num [i]' (NOT 'num[i]') into the map
+                - So, when checking the next num[i], if it is found to already exist within the map, it means we found the
+                second one. 
+        '''
+
+    
+
