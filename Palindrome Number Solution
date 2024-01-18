@@ -1,0 +1,97 @@
+#The following is a solution to the Palindrome Number problem (easy level) on LeetCode.
+
+'''
+Given an integer x, return (true) if x is a palindrome and (false) otherwise.
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+'''
+
+class Solution(object):
+    def isPalindrome(self, x:int) -> bool:
+'''
+The function isPalindrome that takes an integer 'x' as an argument and returns a boolean
+(a truth value - TRUE or FALSE). It acts as a base condition. 
+'''
+        if x < 0:
+            return false
+        #This is criteria 1.
+
+        number = x
+        #This will store the reverse of the number.
+
+        reverse = 0
+        #defining reverse as 0 currently with the intention of replacing it in the following
+        #test.
+
+        while number: #While number is a loop that continues executing as long as number ≠ 0.
+            reverse = reverse * 10 + number % 10 #In each iteration, the last digit of "number" is
+            #extracted using the modulus operator (the remainder when the first operand is divided by
+            #the second. The extracted digit is then added to the current "reverse" value * 10.
+            #This process effectively builds the reversed number by appending digits in reverse order.
+            number //= 10 #After extracing the last digit, "number" is updated by performing integer
+            #division by 10. This removes the last digit from "number," preparing it for the next
+            #iteration. 
+        return x == reverse
+'''
+***
+EXTRA EXPLANATION ALGORITHM:
+
+1. number % 10: This expression calculates the remainder when number is divided by 10. This
+effectively gives you the last digit of the number. For example, if number is 123,
+then number % 10 would be 3.
+
+2. reverse * 10: This part multiplies the current value of reverse by 10. This is done to shift
+the existing digits in reverse one place to the left. This step ensures that there's space for the
+new digit to be added at the units place.
+
+3. + number % 10: The result of number % 10 (the last digit) is added to the product of reverse * 10.
+This effectively appends the last digit to the reversed number.
+***
+
+The use of the "10" in this algorithm is related to the fact that integers are commonly represented
+in base 10 (decimal.) The algorithm exploits the fact that when you multiply the current reversed number
+by 10 and add the next digit, you effectively shift the existing digits one place to the left.
+
+For example, if the number inputted is "123," the algorithm would iterate as follows:
+
+1st iteration: 'reverse = 0 * 10 + 3', 'number = 12'
+2nd iteration: 'reverse = 3 * 10 + 2', 'number = 1'
+3rd iteration: 'reverse = 32 * 10 + 1', 'number = 0'
+
+At the end of the iterations 'reverse' would be equal to 321. 
+
+'''
+#Raw code:
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x < 0:
+            return False
+        number = x
+        reverse = 0
+        while number:
+            reverse = reverse * 10 + number % 10
+            number //= 10
+        return x == reverse
+
+quit()
+'''
+The problem is checking to see if a number (say, 121) reversed is still the same number. The
+solution is made easier given two constraints: 1) we only have to check for positive integers
+as negative integers reversed (when typed or written) will have a "-" at the incorrect end, and
+2) converting the integers to a string and comparing them makes the problem easy.
+
+Here is the criteria:
+
+1) If the number is negative, return false, else proceed to #2.
+2) Store the given input (number) x in a variable (defined here as "number".) "Number" is the
+variable in which operations will be performed on and due to that, its value will change. We will
+use x at the end of the program to compare with the reversed number.
+3) Reverse the number.
+4) Return true if the reverse number and given number are equal, else return false.
+
+'''
