@@ -71,14 +71,16 @@ class Solution:
     def isPalindrome(self, x: int) -> bool:
         if x < 0:
             return False
+
         number = x
         reverse = 0
-        while number:
-            reverse = reverse * 10 + number % 10
-            number //= 10
-        return x == reverse
 
-quit()
+        while x != 0:
+            reverse = reverse * 10 + x % 10
+            x //= 10
+       
+        return number == reverse
+
 '''
 The problem is checking to see if a number (say, 121) reversed is still the same number. The
 solution is made easier given two constraints: 1) we only have to check for positive integers
