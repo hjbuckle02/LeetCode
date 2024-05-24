@@ -1,0 +1,17 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+'''
+Breaking this down:
+
+1. 'def' : This keyword is used to define a function or method in Python.
+2. 'longestCommonPrefix' : This is the name of the method. It's customary to use descriptive methods to 
+indicate what the method does. In this case, 'longestCommonPrefix suggests that the method will find
+the longest common prefix among a list of strings.
+3. 'self': In Python, 'self" is used in instance methods to refer the instance of the class on which the
+method is being called. It allows access to the attributes and other methods of the class.
+4. 'strs: List[str]': this specifies the parameter 'strs' that the method takes. The part after the method
+takes. The part after the colon ('List[str]') is a type hint, indicating that 'strs' should be a list
+of strings.
+'List[str]' comes from the 'typing' module, which allows for type hinting in Python. It suggests that 
+'strs" should be a list where each element is a string. 
+5. 
