@@ -1,17 +1,57 @@
+'''
+In summary, for the following part:
+
+"  if strs is None or len(strs)=0:
+            return lcp #find the minimum length string from the array
+
+        minimumlength = len(strs[0]) #find the minimum length string from the array
+       
+        for i in range(1, len(strs)):
+            minimumLength = min(minimumLength, len(strs[i])) #Lopp until the minimum length"
+
+- We determine the shortest string's length.
+- We then iterate up to this length, comparing characters at each position across all strings.
+- If a mismatch is found, we return the substring up to the current position.
+- If no mismatches are found, we return the entire prefix up to minimumLength.
+'''
+        for j in range(0, len(strs)):
+                if strs[j][i] != current: 
+                    return lcp
+            lcp += current
+- "for j in range(0, len(strs)):" This initiates a loop that iterates over each string in the list 'strs.'
+"len(strs))" gives the number of strings in the list, and "range(0, len(strs))" generates the sequences of
+indices (elements in a sequence) from 0 to one less than the length of "strs."
+- "if strs[j][i] != current:": Within the loop, this conditional statement checks if character index "i" of the "j'th" (ex. 23rd)
+string ("strs[j]") is not equal to the current character ('current'). If it's not equal, it means that the character at this position
+differs from the others, indicating the end of the longest common prefix. In this case, the function returns the remaining characters
+as lcp. 
+- "lcp += current": this line adds the current character ('current') to the longest common prefix "lcp." It's inside the loop, so
+it accumulates characters that are common among all processed strings. 
+
+#raw code
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-'''
-Breaking this down:
+        
+        lcp = '' #base condition
+        
+        if strs is None or len(strs) == 0:
+            return lcp #find the minimum length string from the array
 
-1. 'def' : This keyword is used to define a function or method in Python.
-2. 'longestCommonPrefix' : This is the name of the method. It's customary to use descriptive methods to 
-indicate what the method does. In this case, 'longestCommonPrefix suggests that the method will find
-the longest common prefix among a list of strings.
-3. 'self': In Python, 'self" is used in instance methods to refer the instance of the class on which the
-method is being called. It allows access to the attributes and other methods of the class.
-4. 'strs: List[str]': this specifies the parameter 'strs' that the method takes. The part after the method
-takes. The part after the colon ('List[str]') is a type hint, indicating that 'strs' should be a list
-of strings.
-'List[str]' comes from the 'typing' module, which allows for type hinting in Python. It suggests that 
-'strs" should be a list where each element is a string. 
-5. 
+        minimumLength = len(strs[0]) #find the minimum length string from the array
+       
+        for i in range(1, len(strs)):
+            minimumLength = min(minimumLength, len(strs[i])) #Lopp until the minimum length
+
+        for i in range(0, minimumLength): #get the current character from the first string
+            current = strs[0][i]
+            for j in range(0, len(strs)):
+                if strs[j][i] != current: 
+                    return lcp
+            lcp += current
+'''
+A summary of the steps above:
+
+1. First find the shortest string and its length to act as a constraint. 
+2. Secondly, we will take the first string and match its each character one by one with all the other strings.
+3. As soon as we encounter a character which does not match, we will break out of loop
+'''
