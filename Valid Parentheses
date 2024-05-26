@@ -1,0 +1,96 @@
+Breaking down the steps of this problem:
+
+1. Take the input from the user. 
+2. Have a dictionary of valid characters. 
+3. Determine if the input is valid (meets the correct characters.)
+4. Test to see if the first index is different from the second index.
+5. Ensure the two are in the correct order with the corresponding character.
+6. Determine as "false" else "true."
+
+'''
+#The problem
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+An input string is valid if:
+
+- Open brackets must be closed by the same type of brackets.
+- Open brackets must be closed in the correct order.
+- Every close bracket has a corresponding open bracket of the same type.
+
+Example 1:
+
+Input: s = "()"
+Output: true
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+Example 3:
+
+Input: s = "(]"
+Output: false
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of parentheses only '()[]{}'.
+
+'''
+#Raw code
+class Solution:
+    def isValid(self, s: str) -> bool:
+        leftsymbols =[]
+
+        for c in s:
+            if c in ['(','{','[']:
+                leftsymbols.append(c)
+            elif c == ')' and len(leftsymbols) != 0 and leftsymbols[-1] == '(':
+                leftsymbols.pop()
+            elif c == '}' and len(leftsymbols) != 0 and leftsymbols[-1] == '{':
+                leftsymbols.pop()
+            elif c == ']' and len(leftsymbols) != 0 and leftsymbols[-1] == '[':
+                leftsymbols.pop()
+            else:
+                return False
+
+        return leftsymbols == []
+            
+'''
+#The explanation from redquark.org.
+
+This is a simple question. We will traverse the string s from left to right and see if left and right parentheses are matching with their corresponding counterpart.
+
+Traverse the string from left to right.
+If we encounter the open/left parenthesis, then we will push it to the Stack data structure due to its Last In First Out (LIFO) property.
+If we encounter any of the close/right parentheses, we will check it with the top of the stack. If it is the correct corresponding open/left parenthesis, we will move further, else we will return false.
+At last, for valid string, the stack should be empty because all the left parentheses should have matched with the right ones.
+Time Complexity
+We are traversing the string once, hence the time complexity will be O(n).
+
+Space Complexity
+We are using Stack to store characters of the string, hence the space complexity will be O(n)
+'''
+#To improve runtime:
+
+class Solution:
+    def isValid(self, s: str) -> bool: # The method isValid is designed to check if a string containing only the characters 
+'(', ')', '{', '}', '[', and ']' is a valid sequence of balanced parentheses.
+       
+        d={')':'(',']':'[','}':'{'} #The dictionary d maps each closing bracket to its corresponding opening bracket. 
+        This allows easy lookup to check for matching pairs.
+        st=[] #establishes the stack
+        for i in s: #The method iterates over each character i in the string s.
+            if i in d: #If the current character i is a closing bracket (i.e., it's in the dictionary d):
+It checks if the stack st is not empty and if the top of the stack st[-1] is the corresponding opening bracket (d[i]). If so, it pops the top of the stack, indicating a matched pair.
+If the stack is empty or the top of the stack does not match the corresponding opening bracket, it returns False, indicating an invalid sequence.
+                if st and st[-1]==d[i]:
+                    st.pop()
+                else:
+                    return False
+            else:
+                
+                st.append(i)
+        return True if not st else False
+        
+        
+        
